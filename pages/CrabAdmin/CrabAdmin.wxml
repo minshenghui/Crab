@@ -1,0 +1,56 @@
+<cu-custom bgColor="bg-gradual-pink">
+  <view slot="content">新增轮播图</view>
+</cu-custom>
+
+<form wx:if="{{ isUploads }}">
+  <view class="cu-form-group">
+    <view class="title">名称：</view>
+    <input placeholder="不超过 30 个字符" value="{{ inputValue }}" maxlength="30" bindinput="getName"></input>
+  </view>
+
+  <view class="cu-form-group bg-white flex">
+    <view class="action">
+      轮播图
+    </view>
+    <view class="action right">
+      {{imgList.length}} / 6
+    </view>
+  </view>
+
+  <view class="cu-bar bg-white padding">
+    <view class="grid col-1 grid-square flex-sub">
+
+      <image mode="widthFix" class="up-img" src="{{ imgList[index] }}" wx:for="{{ imgList }}" wx:if="{{ index < 6}}" wx:key bindtap="viewImage" data-url="{{ imgList[index] }}" bindload="imgLoad">
+        <view class="cu-tag bg-red" catchtap="delImg" data-index="{{ index }}">
+          <text class="cuIcon-close"></text>
+        </view>
+      </image>
+
+      <view class="padding-xs solids" bindtap="chooseImage" wx:if="{{ imgList.length < 6 }}">
+        <text class="cuIcon-cameraadd"></text>
+      </view>
+
+    </view>
+
+  </view>
+
+  <view class="margin bg-white">
+    <button class="center bg-green " bindtap="add">上传</button>
+  </view>
+</form>
+
+<view wx:if="{{ isShow }}" style="width: 100%; text-align:center">
+  <view class="text-xsl padding">
+    <text class="cuIcon-roundcheckfill text-green"></text>
+  </view>
+  <view class="padding">上传成功！</view>
+  <button class="margin-right margin-left bg-green margin-tb-sm" bindtap="exit">返回</button>
+</view>
+
+<view wx:if="{{ isFail }}" style="width: 100%; text-align:center">
+  <view class="text-xsl padding">
+    <text class="cuIcon-roundclose text-red"></text>
+  </view>
+  <view class="padding">上传失败，请检查网络重新上传！</view>
+  <button class="margin-right margin-left bg-red margin-tb-sm" bindtap="exit">返回</button>
+</view>

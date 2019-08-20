@@ -1,0 +1,9 @@
+page {
+    background: #fff
+}
+
+.up-img {
+  width: 100%;
+  margin-bottom: 20rpx;
+  border-radius: 5rpx
+}
